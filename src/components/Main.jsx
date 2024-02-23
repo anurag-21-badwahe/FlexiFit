@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MobileStepper from '@mui/material/MobileStepper';
@@ -9,29 +10,22 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 
-// Sample card data
+import EyeRelief from './EyeRelief';
+import PostureCorrection from './PostureCorrection';
+import WaterIntake from './WaterIntake';
+import BlueLightFilter from './BlueLightFilter';
+
+
 const cards = [
-  {
-    title: 'Card 1',
-    content: 'This is the content of Card 1.',
-  },
-  {
-    title: 'Card 2',
-    content: 'This is the content of Card 2.',
-  },
-  {
-    title: 'Card 3',
-    content: 'This is the content of Card 3.',
-  },
-  {
-    title: 'Card 4',
-    content: 'This is the content of Card 4.',
-  },
+  { title: 'Eye Relief', content: <EyeRelief /> },
+  { title: 'Posture Correction', content: <PostureCorrection/> },
+  { title: 'Water Intake Tracker', content: <WaterIntake /> },
+  { title: 'Blue light mode', content: <BlueLightFilter/> },
 ];
 
-function SwipeableCardStepper() {
+function Main() {
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const maxSteps = cards.length;
 
   const handleNext = () => {
@@ -43,7 +37,7 @@ function SwipeableCardStepper() {
   };
 
   return (
-    <Box sx={{ maxWidth: 400, flexGrow: 1 ,border:"1px solid black",borderRadius:"25%"}}>
+    <Box sx={{ maxWidth: 600,flexGrow: 1, border: "1px solid black", borderRadius: "25%" }}>
       <Paper square elevation={0}>
         <Typography>{cards[activeStep].title}</Typography>
       </Paper>
@@ -57,8 +51,7 @@ function SwipeableCardStepper() {
           <Box key={index}>
             {index === activeStep && (
               <Box>
-                <Typography>{card.content}</Typography>
-                {/* Add your functionality or components for each card here */}
+                {card.content}
               </Box>
             )}
           </Box>
@@ -70,14 +63,12 @@ function SwipeableCardStepper() {
         activeStep={activeStep}
         nextButton={
           <Button size="small" onClick={handleNext}>
-            
             {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
           </Button>
         }
         backButton={
           <Button size="small" onClick={handleBack}>
             {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            
           </Button>
         }
       />
@@ -85,4 +76,4 @@ function SwipeableCardStepper() {
   );
 }
 
-export default SwipeableCardStepper;
+export default Main;
