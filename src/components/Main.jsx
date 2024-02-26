@@ -42,7 +42,8 @@ function Main() {
   return (
     <Box
       sx={{
-        maxWidth: 600,
+        minWidth: 400,
+        minHeight:200,
         flexGrow: 1,
         border: "1px solid black",
         borderRadius: "25%",
@@ -66,7 +67,7 @@ function Main() {
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={(index) => setActiveStep(index)}
-        enableMouseEvents
+        // enableMouseEvents
       >
         {cards.map((card, index) => (
           <Box key={index}>
