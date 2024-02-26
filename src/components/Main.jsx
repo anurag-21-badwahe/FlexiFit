@@ -45,8 +45,6 @@ function Main() {
         minWidth: 400,
         minHeight:200,
         flexGrow: 1,
-        border: "1px solid black",
-        borderRadius: "25%",
       }}
     >
       <Paper square elevation={0}>
@@ -56,7 +54,6 @@ function Main() {
             backgroundImage:
               "linear-gradient(160deg, #0093E9 0%, #80D0C7 100%)",
             padding: "4px",
-            borderRadius: "15px",
             fontFamily: "'Play', sans-serif", 
           }}
         >

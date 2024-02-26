@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Slider from '@mui/material/Slider';
+import CountdownTimer from './CountdownTimer';
 
 const notiBar = {
   display: "flex",
@@ -12,7 +13,7 @@ const notiBar = {
 
 const EyeRelief = () => {
   const [valDisp, setValDisp] = useState(false);
-  const [min,setMin] = useState(20)
+  const [min,setMin] = useState(1)
 
   const onMouseEnter = () => {
     setValDisp(true);
@@ -49,7 +50,7 @@ const EyeRelief = () => {
         <div>Sound</div>
         <Switch />
       </div>
-        
+        <div>You are using the device continously for<CountdownTimer minTime = {min}/></div>
     </>
   );
 };
