@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Switch from "@mui/material/Switch";
-import Box from "@mui/material/Box";
 import Slider from '@mui/material/Slider';
 import CountdownTimer from './CountdownTimer';
 
@@ -13,7 +12,14 @@ const notiBar = {
 
 const EyeRelief = () => {
   const [valDisp, setValDisp] = useState(false);
-  const [min,setMin] = useState(1)
+  const [min, setMin] = useState(() => {
+    const savedMin = localStorage.getItem("min");
+    return savedMin ? parseInt(savedMin) : 1;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("min", min);
+  }, [min]);
 
   const onMouseEnter = () => {
     setValDisp(true);
@@ -22,10 +28,10 @@ const EyeRelief = () => {
   const onMouseLeave = () => {
     setValDisp(false);
   };
-  const setSliderVal = (e,newVal)=>{
-    setMin(newVal)
-  }
 
+  const setSliderVal = (e, newVal) => {
+    setMin(newVal);
+  };
 
   return (
     <>
@@ -33,8 +39,8 @@ const EyeRelief = () => {
       <Slider
         aria-label="Always visible"
         defaultValue={20}
-        value = {min}
-        step={10}
+        value={min}
+        step={1}
         valueLabelDisplay={valDisp ? "on" : "off"}
         onChange={setSliderVal}
         onMouseEnter={onMouseEnter}
@@ -50,7 +56,7 @@ const EyeRelief = () => {
         <div>Sound</div>
         <Switch />
       </div>
-        <div>You are using the device continously for<CountdownTimer minTime = {min}/></div>
+      <div>You are using the device continuously for<CountdownTimer minTime={min}/></div>
     </>
   );
 };

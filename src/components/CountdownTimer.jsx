@@ -7,9 +7,9 @@ const clockSx = {
 };
 
 const CountdownTimer = ({ minTime }) => {
-  const initialTimeInSeconds = minTime * 60;
+  const initialTimeInSeconds = localStorage.getItem("time") || minTime * 60;
   const [startBtn, setStartBtn] = useState(true);
-  const [time, setTime] = useState(initialTimeInSeconds);
+  const [time, setTime] = useState(parseInt(initialTimeInSeconds));
   const [currTime, setCurrTime] = useState(minTime);
   const [timerStarted, setTimerStarted] = useState(false);
 
@@ -32,6 +32,10 @@ const CountdownTimer = ({ minTime }) => {
       setTimerStarted(false);
     }
   }, [time, minTime]);
+
+  useEffect(()=>{
+    localStorage.setItem("time",time);
+  },[time])
 
   const startTimer = () => {
     setStartBtn(!startBtn);

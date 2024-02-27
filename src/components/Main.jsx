@@ -45,6 +45,8 @@ function Main() {
         minWidth: 400,
         minHeight:200,
         flexGrow: 1,
+        backgroundColor: "#F0F8FF",
+        borderRadius:"15px"
       }}
     >
       <Paper square elevation={0}>
