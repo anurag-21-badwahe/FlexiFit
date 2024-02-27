@@ -55,6 +55,10 @@ const CountdownTimer = ({ minTime }) => {
     setTimerStarted(false);
   };
 
+  if(time === 0){
+    alert(`You are using you devices since ${minTime} minutes`)
+  }
+
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;

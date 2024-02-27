@@ -40,7 +40,7 @@ const EyeRelief = () => {
         aria-label="Always visible"
         defaultValue={20}
         value={min}
-        step={1}
+        step={0.2}
         valueLabelDisplay={valDisp ? "on" : "off"}
         onChange={setSliderVal}
         onMouseEnter={onMouseEnter}
