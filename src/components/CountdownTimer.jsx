@@ -8,10 +8,11 @@ const clockSx = {
 
 const CountdownTimer = ({ minTime }) => {
   const initialTimeInSeconds = localStorage.getItem("time") || minTime * 60;
-  const [startBtn, setStartBtn] = useState(true);
+  const initialTimerStarted = localStorage.getItem("timerStarted") === "true" || false;
+  const [startBtn, setStartBtn] = useState(!initialTimerStarted);
   const [time, setTime] = useState(parseInt(initialTimeInSeconds));
   const [currTime, setCurrTime] = useState(minTime);
-  const [timerStarted, setTimerStarted] = useState(false);
+  const [timerStarted, setTimerStarted] = useState(initialTimerStarted);
 
   useEffect(() => {
     let intervalId;
@@ -33,9 +34,10 @@ const CountdownTimer = ({ minTime }) => {
     }
   }, [time, minTime]);
 
-  useEffect(()=>{
-    localStorage.setItem("time",time);
-  },[time])
+  useEffect(() => {
+    localStorage.setItem("time", time);
+    localStorage.setItem("timerStarted", timerStarted);
+  }, [time, timerStarted]);
 
   const startTimer = () => {
     setStartBtn(!startBtn);
