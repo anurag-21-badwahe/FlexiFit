@@ -10,19 +10,17 @@ import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import SwipeableViews from "react-swipeable-views";
 
-
 import EyeRelief from "./EyeRelief";
 import PostureCorrection from "./PostureCorrection";
 import WaterIntake from "./WaterIntake";
 import BlueLightFilter from "./BlueLightFilter";
 
 const cards = [
-  { title: "Eye Relief", content: <EyeRelief /> },
-  { title: "Posture Correction", content: <PostureCorrection /> },
-  { title: "Water Intake Tracker", content: <WaterIntake /> },
-  { title: "Blue light mode", content: <BlueLightFilter /> },
+  { title: "Eye Relief", content: EyeRelief },
+  { title: "Posture Correction", content: PostureCorrection },
+  { title: "Water Intake Tracker", content: WaterIntake },
+  { title: "Blue light mode", content: BlueLightFilter },
 ];
-
 
 function Main() {
   const theme = useTheme();
@@ -70,7 +68,7 @@ function Main() {
       >
         {cards.map((card, index) => (
           <Box key={index}>
-            {index === activeStep && <Box>{card.content}</Box>}
+            <Box><card.content /></Box>
           </Box>
         ))}
       </SwipeableViews>

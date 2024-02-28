@@ -17,6 +17,7 @@ const EyeRelief = () => {
     return savedMin ? parseFloat(savedMin) : 20; // Retrieve min value from local storage, parse as float
   });
   const [notificationOn, setNotificationOn] = useState(false);
+  const [soundOn, setSoundOn] = useState(false);
 
   useEffect(() => {
     if(min > 0) localStorage.setItem("min", min.toString()); // Store min value as string in local storage   
@@ -44,6 +45,14 @@ const EyeRelief = () => {
       alert("Notifications turned off!");
     }
   };
+  const handleSoundToggle = () => {
+    setSoundOn(!soundOn);
+    if (!soundOn) {
+      alert("Alarm turned off!");
+    } else {
+      alert("Alarm turned on!");
+    }
+  };
 
   return (
     <>
@@ -67,7 +76,7 @@ const EyeRelief = () => {
       </div>
       <div style={notiBar}>
         <div>Sound</div>
-        <Switch />
+        <Switch onClick = {handleSoundToggle}/>
       </div>
       <div>You are using the device continuously for<CountdownTimer minTime={min}/></div>
     </>
