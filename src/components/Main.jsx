@@ -49,7 +49,7 @@ function Main() {
         borderRadius:"15px"
       }}
     >
-      <Paper square elevation={0}>
+      <Paper square elevation={1}>
         <Typography
           sx={{
             backgroundColor: "#0093E9",

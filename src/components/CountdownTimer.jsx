@@ -27,6 +27,13 @@ const CountdownTimer = ({ minTime }) => {
 
   useEffect(() => {
     if (time === 0) {
+      console.log("Timer reached zero. Opening new window...");
+      const newWindow = window.open("https://www.medicalnewstoday.com/articles/321536");
+      if (newWindow) {
+        console.log("New window opened successfully.");
+      } else {
+        console.error("Failed to open new window. Popup blocker might be active.");
+      }
       setCurrTime(minTime);
       setTime(minTime * 60);
       setStartBtn(true);
@@ -38,6 +45,8 @@ const CountdownTimer = ({ minTime }) => {
     localStorage.setItem("time", time);
     localStorage.setItem("timerStarted", timerStarted);
   }, [time, timerStarted]);
+
+
 
   const startTimer = () => {
     setStartBtn(!startBtn);
@@ -54,10 +63,6 @@ const CountdownTimer = ({ minTime }) => {
     setStartBtn(!startBtn);
     setTimerStarted(false);
   };
-
-  if(time === 0){
-    alert(`You are using you devices since ${minTime} minutes`)
-  }
 
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
