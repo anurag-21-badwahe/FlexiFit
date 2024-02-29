@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AlarmSound from '../assets/sound.wav'
 
 const clockSx = {
   "border": "1px solid black",
@@ -6,7 +7,7 @@ const clockSx = {
   "fontFamily": "Anta"
 };
 
-const CountdownTimer = ({ minTime }) => {
+const CountdownTimer = ({ minTime,sound}) => {
   const initialTimeInSeconds = localStorage.getItem("time") || minTime * 60;
   const initialTimerStarted = localStorage.getItem("timerStarted") === "true" || false;
   const [startBtn, setStartBtn] = useState(!initialTimerStarted);
@@ -38,8 +39,17 @@ const CountdownTimer = ({ minTime }) => {
       setTime(minTime * 60);
       setStartBtn(true);
       setTimerStarted(false);
-    }
+    } 
   }, [time, minTime]);
+
+  useEffect(()=>{
+    if(time < 3 && sound === true){
+      new Audio(AlarmSound).play();
+   }
+  },[time,sound])
+
+  console.log("sound",sound);
+  console.log("time",time);
 
   useEffect(() => {
     localStorage.setItem("time", time);
@@ -47,6 +57,7 @@ const CountdownTimer = ({ minTime }) => {
   }, [time, timerStarted]);
 
 
+  
 
   const startTimer = () => {
     setStartBtn(!startBtn);
@@ -73,13 +84,13 @@ const CountdownTimer = ({ minTime }) => {
 
     return `${formattedMinutes}:${formattedSeconds}`;
   };
-
   return (
+    
     <>
       <div style={{ "display": "flex", "justifyContent": "center" }}>
         <div style={clockSx}>{formatTime(time)}</div>
       </div>
-      <button onClick={timerStarted ? restartTimer : startTimer}>{startBtn ? "Start" : "Restart"}</button>
+      <button onClick={timerStarted ? restartTimer : startTimer}>{startBtn ? "Start" : "Reset"}</button>
     </>
   );
 };

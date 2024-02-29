@@ -4,6 +4,7 @@ import Slider from '@mui/material/Slider';
 import Alert from '@mui/material/Alert';
 import CountdownTimer from './CountdownTimer';
 import Notification from './Notification';
+import sound from "../assets/sound.wav"
 
 function notifyUser(notificationText = "Thank you for enabling notifications!") {
   if (!("Notification" in window)) {
@@ -33,8 +34,14 @@ const EyeRelief = () => {
     const savedMin = localStorage.getItem("min");
     return savedMin ? parseFloat(savedMin) : 20;
   });
-  const [notificationOn, setNotificationOn] = useState(false);
-  const [soundOn, setSoundOn] = useState(false);
+  const [notificationOn, setNotificationOn] = useState(() => {
+    const storedValue = localStorage.getItem("notificationOn");
+    return storedValue ? JSON.parse(storedValue) : false;
+  });
+  const [soundOn, setSoundOn] = useState(() => {
+    const storedValue = localStorage.getItem("soundOn");
+    return storedValue ? JSON.parse(storedValue) : false;
+  });
 
   useEffect(() => {
     if (min > 0) localStorage.setItem("min", min.toString());
@@ -100,18 +107,21 @@ const EyeRelief = () => {
     new Notification("Eye Relief", { body: "Take a break and rest your eyes!" });
   };
   
-  
-  
-  
-
-  
-  
 
   useEffect(() => {
     if (Notification.permission === "granted") {
       notifyUser();
     }
   }, []);
+  useEffect(() => {
+    localStorage.setItem("notificationOn", JSON.stringify(notificationOn));
+  }, [notificationOn]);
+
+  useEffect(() => {
+    localStorage.setItem("soundOn", JSON.stringify(soundOn));
+  }, [soundOn]);
+
+
 
   return (
     <>
@@ -131,14 +141,14 @@ const EyeRelief = () => {
       />
       <div style={notiBar}>
         <div>Notification</div>
-        <Switch onClick={handleNotificationToggle} />
+        <Switch checked={notificationOn} onClick={handleNotificationToggle} />
       </div>
       <div style={notiBar}>
         <div>Sound</div>
-        <Switch onClick={handleSoundToggle} />
+        <Switch checked={soundOn} onClick={handleSoundToggle} />
       </div>
-      <div>You are using the device continuously for<CountdownTimer minTime={min} /></div>
-       <button onClick={clickToNotify}>show</button>
+      <div>You are using the device continuously for<CountdownTimer minTime={min} sound = {soundOn} /></div>
+      <button onClick={clickToNotify}>show</button>
     </>
   );
 }
