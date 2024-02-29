@@ -1,4 +1,4 @@
-import * as React from "react";
+// Remove the unused import statement for React
 import { useState } from "react";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";

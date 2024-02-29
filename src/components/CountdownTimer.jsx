@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import AlarmSound from '../assets/sound.wav'
+import PropTypes from 'prop-types';
 
 const clockSx = {
   "border": "1px solid black",
@@ -7,7 +8,8 @@ const clockSx = {
   "fontFamily": "Anta"
 };
 
-const CountdownTimer = ({ minTime,sound}) => {
+  const CountdownTimer = ({ minTime, sound }) => {
+    // Component code here
   const initialTimeInSeconds = localStorage.getItem("time") || minTime * 60;
   const initialTimerStarted = localStorage.getItem("timerStarted") === "true" || false;
   const [startBtn, setStartBtn] = useState(!initialTimerStarted);
@@ -94,5 +96,11 @@ const CountdownTimer = ({ minTime,sound}) => {
     </>
   );
 };
+  CountdownTimer.propTypes = {
+    minTime: PropTypes.number.isRequired,
+    sound: PropTypes.bool.isRequired,
+  };
 
-export default CountdownTimer;
+  export default CountdownTimer;
+  
+// export default CountdownTimer;
