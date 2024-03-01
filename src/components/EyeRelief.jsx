@@ -3,7 +3,7 @@ import Switch from "@mui/material/Switch";
 import Slider from '@mui/material/Slider';
 import Alert from '@mui/material/Alert';
 import CountdownTimer from './CountdownTimer';
-import Notification from './Notification';
+// import Notification from './Notification';
 import sound from "../assets/sound.wav"
 
 function notifyUser(notificationText = "Thank you for enabling notifications!") {
@@ -80,22 +80,15 @@ const EyeRelief = () => {
   };
 
   const clickToNotify = () => {
-    console.log("clickToNotify function called");
     if (!("Notification" in window)) {
-      console.log("Browser does not support notifications");
       alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
-      console.log("Notification permission granted");
       showNotification();
     } else {
-      console.log("Requesting notification permission");
       Notification.requestPermission().then(function (permission) {
-        console.log("Permission status after request:", permission);
         if (permission === "granted") {
-          console.log("Notification permission granted after request");
           showNotification();
         } else if (permission === "denied") {
-          console.log("Notification permission denied after request");
           alert("Notifications are blocked. Please enable them in your browser settings.");
         }
       });
@@ -103,19 +96,16 @@ const EyeRelief = () => {
   };
   
   const showNotification = () => {
-    console.log("Showing notification");
     new Notification("Eye Relief", { body: "Take a break and rest your eyes!" });
   };
-  
 
   useEffect(() => {
-    if (Notification.permission === "granted") {
+    // Check for permission when the component mounts
+    if (Notification.permission === "granted" && notificationOn) {
       notifyUser();
     }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("notificationOn", JSON.stringify(notificationOn));
   }, [notificationOn]);
+ 
 
   useEffect(() => {
     localStorage.setItem("soundOn", JSON.stringify(soundOn));

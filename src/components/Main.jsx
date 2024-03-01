@@ -13,13 +13,13 @@ import SwipeableViews from "react-swipeable-views";
 import EyeRelief from "./EyeRelief";
 import PostureCorrection from "./PostureCorrection";
 import WaterIntake from "./WaterIntake";
-import BlueLightFilter from "./EyeInstruction";
+import EyeInstruction from "./EyeInstruction";
 
 const cards = [
   { title: "Eye Relief", content: EyeRelief },
-  { title: "20-20-20 Rule", content: BlueLightFilter },
-  { title: "Posture Correction", content: PostureCorrection },
-  { title: "Water Intake Tracker", content: WaterIntake },
+  { title: "Must Follow 20-20-20 Rule", content: EyeInstruction },
+  { title: "Correct your Posture", content: PostureCorrection },
+  { title: "Drink Water,Stay Hydrated", content: WaterIntake },
 ];
 
 function Main() {
@@ -41,7 +41,7 @@ function Main() {
     <Box
       sx={{
         maxWidth: 400,
-        maxHeight:400,
+        maxHeight:300,
         flexGrow: 1,
         backgroundColor: "#F0F8FF",
         borderRadius:"15px"
