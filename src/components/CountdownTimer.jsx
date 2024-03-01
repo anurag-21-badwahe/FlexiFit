@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import AlarmSound from '../assets/sound.wav'
+import AlarmSound from '../assets/sound.wav';
 
 const clockSx = {
   "border": "1px solid black",
   "width": "60px",
   "fontFamily": "Anta",
-  "marginTop" : "10px"
+  "marginTop": "10px"
 };
 
-const CountdownTimer = ({ minTime,sound}) => {
+const CountdownTimer = ({ minTime, sound }) => {
   const initialTimeInSeconds = localStorage.getItem("time") || minTime * 60;
   const initialTimerStarted = localStorage.getItem("timerStarted") === "true" || false;
   const [startBtn, setStartBtn] = useState(!initialTimerStarted);
@@ -40,25 +40,31 @@ const CountdownTimer = ({ minTime,sound}) => {
       setTime(minTime * 60);
       setStartBtn(true);
       setTimerStarted(false);
-    } 
+    }
   }, [time, minTime]);
 
-  useEffect(()=>{
-    if(time < 3 && sound === true){
+  useEffect(() => {
+    if (time < 3 && sound === true) {
       new Audio(AlarmSound).play();
-   }
-  },[time,sound])
-
-  console.log("sound",sound);
-  console.log("time",time);
+    }
+  }, [time, sound]);
 
   useEffect(() => {
     localStorage.setItem("time", time);
     localStorage.setItem("timerStarted", timerStarted);
   }, [time, timerStarted]);
 
+  useEffect(() => {
+    const storedTime = parseInt(localStorage.getItem("time"));
+    const storedTimerStarted = localStorage.getItem("timerStarted") === "true";
 
-  
+    if (storedTimerStarted) {
+      setTime(storedTime);
+      setCurrTime(Math.floor(storedTime / 60));
+      setStartBtn(false);
+      setTimerStarted(true);
+    }
+  }, []);
 
   const startTimer = () => {
     setStartBtn(!startBtn);
@@ -85,13 +91,13 @@ const CountdownTimer = ({ minTime,sound}) => {
 
     return `${formattedMinutes}:${formattedSeconds}`;
   };
+
   return (
-    
     <>
       <div style={{ "display": "flex", "justifyContent": "center" }}>
         <div style={clockSx}>{formatTime(time)}</div>
       </div>
-      <button style = {{"margin" : "20px"}}onClick={timerStarted ? restartTimer : startTimer}>{startBtn ? "Start" : "Reset"}</button>
+      <button style={{ "margin": "20px" }} onClick={timerStarted ? restartTimer : startTimer}>{startBtn ? "Start" : "Reset"}</button>
     </>
   );
 };
