@@ -138,7 +138,7 @@ const EyeRelief = () => {
         <Switch checked={soundOn} onClick={handleSoundToggle} />
       </div>
       <div>You are using the device continuously for<CountdownTimer minTime={min} sound = {soundOn} /></div>
-      <button onClick={clickToNotify}>show</button>
+      {/* <button onClick={clickToNotify}>show</button> */}
     </>
   );
 }
