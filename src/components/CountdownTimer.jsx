@@ -4,7 +4,8 @@ import AlarmSound from '../assets/sound.wav'
 const clockSx = {
   "border": "1px solid black",
   "width": "60px",
-  "fontFamily": "Anta"
+  "fontFamily": "Anta",
+  "marginTop" : "10px"
 };
 
 const CountdownTimer = ({ minTime,sound}) => {
@@ -90,7 +91,7 @@ const CountdownTimer = ({ minTime,sound}) => {
       <div style={{ "display": "flex", "justifyContent": "center" }}>
         <div style={clockSx}>{formatTime(time)}</div>
       </div>
-      <button onClick={timerStarted ? restartTimer : startTimer}>{startBtn ? "Start" : "Reset"}</button>
+      <button style = {{"margin" : "20px"}}onClick={timerStarted ? restartTimer : startTimer}>{startBtn ? "Start" : "Reset"}</button>
     </>
   );
 };

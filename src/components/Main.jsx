@@ -61,6 +61,7 @@ function Main() {
         </Typography>
       </Paper>
       <SwipeableViews
+     
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={(index) => setActiveStep(index)}
@@ -73,6 +74,7 @@ function Main() {
         ))}
       </SwipeableViews>
       <MobileStepper
+       sx = {{position : "relative",bottom : "55px"}}
         steps={maxSteps}
         position="static"
         activeStep={activeStep}

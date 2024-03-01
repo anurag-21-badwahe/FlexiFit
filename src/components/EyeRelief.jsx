@@ -24,7 +24,7 @@ const notiBar = {
   display: "flex",
   justifyContent: "space-around",
   alignItems: "center",
-  border: "1px"
+  border: "1px",
 };
 
 const EyeRelief = () => {
@@ -115,7 +115,7 @@ const EyeRelief = () => {
 
   return (
     <>
-      <div>Give break to eyes after <span>{min}</span> minutes</div>
+      <div>Set timer here to give break to eyes after <span>{min}</span> minutes</div>
       <Slider
         aria-label="Always visible"
         defaultValue={20}
@@ -129,15 +129,15 @@ const EyeRelief = () => {
         min={0.1}
         sx={{ width: "150px" }}
       />
-      <div style={notiBar}>
+      {/* <div style={notiBar}>
         <div>Notification</div>
         <Switch checked={notificationOn} onClick={handleNotificationToggle} />
-      </div>
+      </div> */}
       <div style={notiBar}>
         <div>Sound</div>
         <Switch checked={soundOn} onClick={handleSoundToggle} />
       </div>
-      <div>You are using the device continuously for<CountdownTimer minTime={min} sound = {soundOn} /></div>
+      <div>Timer Counter is at<CountdownTimer minTime={min} sound = {soundOn} /></div>
       {/* <button onClick={clickToNotify}>show</button> */}
     </>
   );

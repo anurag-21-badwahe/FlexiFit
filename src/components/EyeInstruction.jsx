@@ -7,7 +7,7 @@ const BlueLightFilter = () => {
     <div> 
         <img
           src={EyeInst}
-          style={{ overflow: "hidden", width: "400px",marginTop: "10px" }}
+          style={{ overflow: "hidden", width: "350px",marginTop: "10px" }}
           alt="Eye Relief Image"
         />
       </div>
