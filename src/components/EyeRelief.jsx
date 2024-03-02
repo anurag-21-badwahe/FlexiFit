@@ -43,10 +43,20 @@ const EyeRelief = () => {
     return storedValue ? JSON.parse(storedValue) : false;
   });
 
-  useEffect(() => {
-    if (min > 0) localStorage.setItem("min", min.toString());
-  }, [min]);
+  // useEffect(() => {
+  //   if (min > 0) {
+  //     localStorage.setItem("min", min.toString());
+  //     chrome.storage.local.set("min", min.toString());
+  //   }
+  // }, [min]);
 
+  useEffect(() => {
+    if (min > 0) {
+      localStorage.setItem("min", min.toString());
+      // chrome.storage.local.set( "min", min.toString());
+    }
+  }, [min]);
+  
   const onMouseEnter = () => {
     setValDisp(true);
   };
